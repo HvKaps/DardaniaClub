@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { 
+  font-family: 'Teko', sans-serif; 
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  body { cursor: auto; }
+}
+
+p, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.font-outline-2 {
+  -webkit-text-stroke: 2px currentColor;
+  color: transparent;
+}
+
+.clip-path-slant {
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+}

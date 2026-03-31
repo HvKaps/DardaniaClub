@@ -17,7 +17,7 @@ const Home = () => {
       <header className="relative h-screen overflow-hidden flex items-center justify-center">
         <motion.div style={{ y: y1 }} className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/40 z-10" />
-          <img src={IMAGES.hero} className="w-full h-full object-cover" alt="Hero" />
+          <img src="/accueil.jpg" className="w-full h-full object-cover" alt="Hero" />
         </motion.div>
         
         <div className="relative z-20 text-center px-4 mix-blend-difference text-white">
@@ -61,7 +61,7 @@ const Home = () => {
             </div>
           </div>
           <div className="relative aspect-video group cursor-pointer cursor-hover overflow-hidden rounded-sm">
-             <img src={IMAGES.videoBg} className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700" alt="Video cover" />
+             <img src="/accueil.jpg" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700" alt="Video cover" />
              <div className="absolute inset-0 flex items-center justify-center">
                <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition">
                  <Play fill="white" className="ml-1" />
@@ -93,8 +93,8 @@ const Home = () => {
           ))}
         </div>
         <div className="text-center mt-12">
-          <button onClick={() => navigate('/classes')} className="px-8 py-4 border-2 border-black font-black uppercase tracking-widest hover:bg-black hover:text-white transition">
-            Voir le planning complet
+          <button onClick={() => navigate('/EventPage')} className="px-8 py-4 border-2 border-black font-black uppercase tracking-widest hover:bg-black hover:text-white transition">
+            Voir le planning des évènements 
           </button>
         </div>
       </section>

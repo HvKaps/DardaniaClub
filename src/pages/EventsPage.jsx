@@ -8,17 +8,21 @@ const EventsPage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // URL de ton API Render
+  const API_URL = 'https://dardania-back.onrender.com/api/admin/events';
+
   useEffect(() => {
-    // CORRECTION : On récupère les identifiants stockés lors du login
     const authData = localStorage.getItem('authData');
 
-    fetch('http://localhost:8080/api/admin/events', {
+    // On utilise l'URL Render ici
+    fetch(API_URL, {
       headers: {
-        'Authorization': `Basic ${authData}` // On prouve au serveur qu'on est connecté
+        'Authorization': authData ? `Basic ${authData}` : '',
+        'Content-Type': 'application/json'
       }
     })
       .then(res => {
-        if (!res.ok) throw new Error("Erreur 401 ou 404");
+        if (!res.ok) throw new Error("Erreur de réponse serveur");
         return res.json();
       })
       .then(data => {
@@ -26,7 +30,7 @@ const EventsPage = () => {
         setLoading(false);
       })
       .catch(err => {
-        console.error("Erreur:", err);
+        console.error("Erreur API:", err);
         setLoading(false);
       });
   }, []);
@@ -44,37 +48,43 @@ const EventsPage = () => {
           <SectionHeader title="Calendrier Combat" subtitle="Prochains Évènements" align="center" />
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-8">
           {events.length === 0 ? (
-            <p className="text-center opacity-50 italic uppercase tracking-widest">Aucun combat prévu pour le moment.</p>
+            <div className="text-center py-20 border border-dashed border-white/10">
+                <p className="opacity-50 uppercase tracking-widest font-mono">Aucun combat récupéré du serveur.</p>
+                <p className="text-xs mt-2 text-red-500">Vérifie que ton backend Render est bien "Live".</p>
+            </div>
           ) : (
             events.map((event, index) => (
               <motion.div 
-                key={event.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group flex flex-col md:flex-row items-center bg-white/5 border border-white/10 overflow-hidden hover:border-red-600 transition-colors"
+                key={event.id || index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex flex-col md:flex-row items-center bg-white/5 border border-white/10 overflow-hidden hover:border-red-600 transition-all"
               >
-                <div className="w-full md:w-80 h-60 overflow-hidden bg-white/10">
-                  {/* On utilise une image locale ou par défaut */}
-                  <img src="/accueil.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700" alt={event.title} />
+                <div className="w-full md:w-80 h-64 overflow-hidden bg-zinc-900">
+                  <img src="/accueil.jpg" className="w-full h-full object-cover grayscale" alt={event.title} />
                 </div>
 
                 <div className="flex-1 p-8">
-                  <div className="flex items-center gap-3 mb-3 text-red-600 font-mono text-xs font-bold uppercase tracking-widest">
-                    <Calendar size={14} /> {event.date} • {event.time || "19:00"}
+                  <div className="flex items-center gap-3 mb-4 text-red-600 font-mono text-xs font-bold uppercase tracking-widest">
+                    <Calendar size={14} /> {event.date || "Date à venir"} • {event.time || "19:00"}
                   </div>
-                  <h3 className="text-4xl font-black uppercase italic mb-4">{event.title}</h3>
-                  <p className="flex items-center gap-2 text-sm opacity-60 font-bold uppercase">
-                    <MapPin size={16} className="text-red-600"/> {event.location}
+                  <h3 className="text-3xl md:text-5xl font-black uppercase italic mb-6">{event.title}</h3>
+                  <p className="flex items-center gap-2 text-sm opacity-70 uppercase font-bold">
+                    <MapPin size={16} className="text-red-600"/> {event.location || "Provins"}
                   </p>
                 </div>
 
-                <div className="w-full md:w-72 p-8 bg-black/40 border-l border-white/10 flex flex-col items-center">
-                  <div className="text-4xl font-black mb-6 italic">{event.price} €</div>
+                <div className="w-full md:w-80 p-10 bg-black/40 border-l border-white/10 flex flex-col items-center">
+                  <div className="text-5xl font-black mb-8 italic">{event.price || 0} €</div>
                   <div className="w-full">
-                     <PayPalPart prix={event.price} titre={event.title} onSuccess={() => alert("Réservation confirmée !")} />
+                     <PayPalPart 
+                        prix={event.price} 
+                        titre={event.title} 
+                        eventId={event.id}
+                        onSuccess={() => alert("Réservation confirmée !")} 
+                     />
                   </div>
                 </div>
               </motion.div>

@@ -1,4 +1,4 @@
-const API_URL = 'https://dardania-back.onrender.com';
+const API_URL = 'https://dardania-back.onrender.com/api/admin';
 
 const getHeaders = () => {
   const authData = localStorage.getItem('authData');
@@ -9,20 +9,33 @@ const getHeaders = () => {
 };
 
 export const adminService = {
-  getMembers: () => fetch(`${API_URL}/members`, { headers: getHeaders() }).then(res => res.json()),
+  // Récupérer les adhérents (GET /api/admin/members)
+  getMembers: () => 
+    fetch(`${API_URL}/members`, { headers: getHeaders() })
+      .then(res => res.json()),
   
-  getEvents: () => fetch(`${API_URL}/events`, { headers: getHeaders() }).then(res => res.json()),
+  // Récupérer les événements (GET /api/admin/events)
+  getEvents: () => 
+    fetch(`${API_URL}/events`, { headers: getHeaders() })
+      .then(res => res.json()),
 
-  addEvent: (eventData) => fetch(`${API_URL}/events`, {
-    method: 'POST',
-    headers: getHeaders(),
-    body: JSON.stringify(eventData)
-  }).then(res => res.json()),
+  // Ajouter un événement (POST /api/admin/events)
+  addEvent: (eventData) => 
+    fetch(`${API_URL}/events`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(eventData)
+    }).then(res => res.json()),
 
-  deleteEvent: (id) => fetch(`${API_URL}/events/${id}`, { 
-    method: 'DELETE', 
-    headers: getHeaders() 
-  }),
+  // Supprimer un événement (DELETE /api/admin/events/{id})
+  deleteEvent: (id) => 
+    fetch(`${API_URL}/events/${id}`, { 
+      method: 'DELETE', 
+      headers: getHeaders() 
+    }),
 
-  getDonations: () => fetch(`${API_URL}/donations`, { headers: getHeaders() }).then(res => res.json())
+  // Récupérer les dons (GET /api/admin/donations)
+  getDonations: () => 
+    fetch(`${API_URL}/donations`, { headers: getHeaders() })
+      .then(res => res.json())
 };

@@ -1,11 +1,12 @@
-const API_URL = 'https://dardania-back.onrender.com';
+const API_URL = 'https://dardania-back.onrender.com/api/auth';
 
 export const authService = {
-  // CONNEXION
+  // CONNEXION (Login)
   login: async (pseudo, motDePasse) => {
+    // Encodage en Base64 pour le Basic Auth
     const credentials = btoa(`${pseudo}:${motDePasse}`);
 
-    const response = await fetch(API_URL + 'login', {
+    const response = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -14,24 +15,27 @@ export const authService = {
       body: JSON.stringify({ pseudo, motDePasse }),
     });
 
-    if (!response.ok) throw new Error('Identifiants incorrects.');
+    if (!response.ok) {
+      throw new Error('Identifiants incorrects ou accès refusé.');
+    }
 
     const data = await response.json();
-    // On stocke les infos pour les réutiliser dans les autres appels API
+    
+    // On stocke l'utilisateur et les credentials pour les appels suivants
     localStorage.setItem('user', JSON.stringify(data));
     localStorage.setItem('authData', credentials);
     
     return data;
   },
 
-  // INSCRIPTION (Par défaut rôle ADHERENT)
+  // INSCRIPTION (Register)
   register: async (userData) => {
-    const response = await fetch(API_URL + 'register', {
+    const response = await fetch(`${API_URL}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
         ...userData, 
-        role: 'ADHERENT' // Un visiteur qui s'inscrit est toujours adhérent
+        role: 'ADHERENT' 
       }),
     });
 
@@ -42,11 +46,15 @@ export const authService = {
     return response.json();
   },
 
+  // DECONNEXION
   logout: () => {
     localStorage.removeItem('user');
     localStorage.removeItem('authData');
     window.location.href = '/auth';
   },
 
-  getCurrentUser: () => JSON.parse(localStorage.getItem('user'))
+  getCurrentUser: () => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
 };

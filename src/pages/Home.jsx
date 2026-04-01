@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Play } from 'lucide-react';
+import { ChevronDown, Play, Instagram } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { IMAGES, CLASSES_DATA, FAQ_DATA } from '../data/constants';
+import { CLASSES_DATA, FAQ_DATA } from '../data/constants';
 import SectionHeader from '../components/SectionHeader';
 import HomeDonationSection from '../components/HomeDonationSection';
 
@@ -10,6 +10,15 @@ const Home = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const navigate = useNavigate();
+
+  // Tes 5 photos pour la galerie
+  const galleryImages = [
+    { id: 1, src: '/accueil.jpg', size: 'col-span-2 row-span-2' }, // Grande photo
+    { id: 2, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
+    { id: 3, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
+    { id: 4, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
+    { id: 5, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
+  ];
   
   return (
     <>
@@ -39,7 +48,7 @@ const Home = () => {
         </div>
       </header>
 
-      {/* SECTION MANIFESTO (VIDEO) - Pour combler le vide du wireframe */}
+      {/* SECTION MANIFESTO (VIDEO) */}
       <section className="py-32 px-6 bg-[#0a0a0a] text-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
@@ -60,7 +69,7 @@ const Home = () => {
                </div>
             </div>
           </div>
-          <div className="relative aspect-video group cursor-pointer cursor-hover overflow-hidden rounded-sm">
+          <div className="relative aspect-video group cursor-pointer overflow-hidden rounded-sm">
              <img src="/accueil.jpg" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700" alt="Video cover" />
              <div className="absolute inset-0 flex items-center justify-center">
                <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition">
@@ -78,7 +87,7 @@ const Home = () => {
         </div>
         <div className="flex flex-col md:flex-row h-[70vh] w-full border-y border-black">
           {CLASSES_DATA.map((item) => (
-            <div key={item.id} className="relative group flex-1 border-r border-black overflow-hidden transition-all duration-500 hover:flex-[2] cursor-pointer cursor-hover grayscale hover:grayscale-0">
+            <div key={item.id} className="relative group flex-1 border-r border-black overflow-hidden transition-all duration-500 hover:flex-[2] cursor-pointer grayscale hover:grayscale-0">
                <img src={item.img} className="absolute inset-0 w-full h-full object-cover" alt={item.title} />
                <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition" />
                <div className="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/90 to-transparent text-white">
@@ -99,7 +108,36 @@ const Home = () => {
         </div>
       </section>
 
-      {/* SECTION DONATION ACCUEIL (NEW) */}
+      {/* NOUVELLE SECTION GALERIE PHOTOS */}
+      <section className="py-32 bg-black text-white px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-12">
+            <SectionHeader title="L'Esprit du Club" subtitle="Galerie" />
+            <div className="hidden md:flex items-center gap-2 text-red-600 font-bold uppercase tracking-widest text-xs mb-8">
+              <Instagram size={16} /> @dardaniaboxing
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[80vh]">
+            {galleryImages.map((img) => (
+              <motion.div 
+                key={img.id}
+                whileHover={{ scale: 0.98 }}
+                className={`${img.size} relative overflow-hidden bg-zinc-900 group`}
+              >
+                <img 
+                  src={img.src} 
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" 
+                  alt="Gallery" 
+                />
+                <div className="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION DONATION ACCUEIL */}
       <HomeDonationSection />
 
       {/* FAQ SECTION */}

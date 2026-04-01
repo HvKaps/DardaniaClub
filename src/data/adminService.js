@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080/api/admin';
+const API_URL = 'https://dardania-back.onrender.com';
 
 const getHeaders = () => {
   const authData = localStorage.getItem('authData');

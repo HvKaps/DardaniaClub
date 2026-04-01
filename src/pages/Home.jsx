@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Play, Instagram } from 'lucide-react';
+import { ChevronDown, Instagram } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CLASSES_DATA, FAQ_DATA } from '../data/constants';
 import SectionHeader from '../components/SectionHeader';
@@ -11,18 +11,18 @@ const Home = () => {
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const navigate = useNavigate();
 
-  // Tes 5 photos pour la galerie
+  // --- CONFIGURATION DE TA GALERIE (5 PHOTOS) ---
   const galleryImages = [
-    { id: 1, src: '/accueil.jpg', size: 'col-span-2 row-span-2' }, // Grande photo
-    { id: 2, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
-    { id: 3, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
-    { id: 4, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
-    { id: 5, src: '/accueil.jpg', size: 'col-span-1 row-span-1' },
+    { id: 1, src: '/img1.jpg', size: 'md:col-span-2 md:row-span-2 col-span-2 h-64 md:h-full' }, 
+    { id: 2, src: '/img2.jpg', size: 'col-span-1 h-40 md:h-full' },
+    { id: 3, src: '/img3.jpg', size: 'col-span-1 h-40 md:h-full' },
+    { id: 4, src: '/img4.jpg', size: 'col-span-1 h-40 md:h-full' },
+    { id: 5, src: '/img5.jpg', size: 'col-span-1 h-40 md:h-full' },
   ];
   
   return (
     <>
-      {/* HERO REVISITÉ */}
+      {/* HERO SECTION */}
       <header className="relative h-screen overflow-hidden flex items-center justify-center">
         <motion.div style={{ y: y1 }} className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/40 z-10" />
@@ -48,15 +48,14 @@ const Home = () => {
         </div>
       </header>
 
-      {/* SECTION MANIFESTO (VIDEO) */}
+      {/* SECTION VALEURS AVEC VIDÉO LOCALE */}
       <section className="py-32 px-6 bg-[#0a0a0a] text-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <SectionHeader title="More Than Just A Gym" subtitle="Nos Valeurs" />
+            <SectionHeader title="Plus qu'un club" subtitle="Nos Valeurs" />
             <p className="text-xl leading-relaxed opacity-70 mb-8 font-light">
-              Le Dardania Sporting Club n'est pas une simple salle de sport. C'est une famille où l'on forge le caractère. 
-              <br/><br/>
-              Du Baby Boxe aux compétiteurs Amateurs, nous partageons la même rigueur et le même respect.
+              Le Dardania Sporting Club forge les corps et les esprits depuis 1994. 
+              Une institution à Provins dédiée à la performance et au respect.
             </p>
             <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
                <div>
@@ -69,21 +68,28 @@ const Home = () => {
                </div>
             </div>
           </div>
-          <div className="relative aspect-video group cursor-pointer overflow-hidden rounded-sm">
-             <img src="/accueil.jpg" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700" alt="Video cover" />
-             <div className="absolute inset-0 flex items-center justify-center">
-               <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition">
-                 <Play fill="white" className="ml-1" />
-               </div>
-             </div>
+          
+          {/* LECTEUR VIDÉO MP4 */}
+          <div className="relative aspect-video overflow-hidden rounded-sm bg-zinc-900 border border-white/10 shadow-2xl">
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="w-full h-full object-cover opacity-80"
+            >
+              <source src="/club.mp4" type="video/mp4" />
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
           </div>
         </div>
       </section>
 
-      {/* SECTION PROGRAMMES (ACCORDION) */}
+      {/* SECTION COURS */}
       <section className="py-32 bg-white text-black">
         <div className="px-6 mb-12">
-           <SectionHeader title="Choisissez Votre Combat" subtitle="Nos Cours" />
+           <SectionHeader title="Dominez le Ring" subtitle="Nos Disciplines" />
         </div>
         <div className="flex flex-col md:flex-row h-[70vh] w-full border-y border-black">
           {CLASSES_DATA.map((item) => (
@@ -103,47 +109,47 @@ const Home = () => {
         </div>
         <div className="text-center mt-12">
           <button onClick={() => navigate('/EventPage')} className="px-8 py-4 border-2 border-black font-black uppercase tracking-widest hover:bg-black hover:text-white transition">
-            Voir le planning des évènements 
+            Voir les prochains combats
           </button>
         </div>
       </section>
 
-      {/* NOUVELLE SECTION GALERIE PHOTOS */}
+      {/* --- SECTION GALERIE PHOTO --- */}
       <section className="py-32 bg-black text-white px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-12">
-            <SectionHeader title="L'Esprit du Club" subtitle="Galerie" />
+            <SectionHeader title="L'Esprit Dardania" subtitle="Galerie" />
             <div className="hidden md:flex items-center gap-2 text-red-600 font-bold uppercase tracking-widest text-xs mb-8">
               <Instagram size={16} /> @dardaniaboxing
             </div>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[80vh]">
+          <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[80vh]">
             {galleryImages.map((img) => (
               <motion.div 
                 key={img.id}
                 whileHover={{ scale: 0.98 }}
-                className={`${img.size} relative overflow-hidden bg-zinc-900 group`}
+                className={`${img.size} relative overflow-hidden bg-zinc-900 group border border-white/5`}
               >
                 <img 
                   src={img.src} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" 
-                  alt="Gallery" 
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700" 
+                  alt="Club Life" 
+                  onError={(e) => { e.target.src = '/accueil.jpg' }}
                 />
-                <div className="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                <div className="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION DONATION ACCUEIL */}
       <HomeDonationSection />
 
-      {/* FAQ SECTION */}
+      {/* SECTION FAQ */}
       <section className="py-32 bg-[#0a0a0a] text-white px-6">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader title="Questions Fréquentes" subtitle="FAQ" align="center" />
+          <SectionHeader title="Des questions ?" subtitle="FAQ" align="center" />
           <div className="space-y-4">
             {FAQ_DATA.map((item, i) => (
               <div key={i} className="border border-white/20 p-6 hover:border-red-600 transition duration-300 bg-white/5">

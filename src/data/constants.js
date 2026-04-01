@@ -14,7 +14,7 @@ export const CLASSES_DATA = [
     id: 1, 
     title: "BABY BOXE", 
     subtitle: "5-7 ANS", 
-    img: IMAGES.kid, 
+    img: '/img6.jpg', 
     details: "Mardi 18h05-18h55", 
     price: "90€",
     schedule: ["Mardi: 18h05 - 18h55"]
@@ -23,7 +23,7 @@ export const CLASSES_DATA = [
     id: 2, 
     title: "ENFANTS", 
     subtitle: "8-10 ANS", 
-    img: IMAGES.kid, 
+    img: '/img7.jpg', 
     details: "Mercredi & Jeudi 18h05-18h55", 
     price: "150€",
     schedule: ["Mercredi: 18h05 - 18h55", "Jeudi: 18h05 - 18h55"]
@@ -59,7 +59,7 @@ export const CLASSES_DATA = [
     id: 6, 
     title: "FEMMES", 
     subtitle: "BOXE FÉMININE", 
-    img: IMAGES.event1, 
+    img: '/img8.jpg', 
     details: "Mardi 20h15 - 21h45", 
     price: "90€",
     schedule: ["Mardi: 20h15 - 21h45"]

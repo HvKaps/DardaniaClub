@@ -69,22 +69,20 @@ const Home = () => {
             </div>
           </div>
           
-          {/* LECTEUR VIDÉO MP4 */}
-          <div className="relative aspect-video overflow-hidden rounded-sm bg-zinc-900 border border-white/10 shadow-2xl">
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-full object-cover opacity-80"
-            >
-              <source src="/club.mp4" type="video/mp4" />
-              Votre navigateur ne supporte pas la vidéo.
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-          </div>
-        </div>
-      </section>
+          {/* LECTEUR VIDÉO YouTube */}
+<div className="relative aspect-video overflow-hidden rounded-sm bg-zinc-900 border border-white/10 shadow-2xl">
+  <iframe
+    src="https://www.youtube.com/embed/wGbV1slRWAQ?autoplay=1&mute=1&loop=1&playlist=wGbV1slRWAQ&controls=0&showinfo=0&rel=0"
+    title="Vidéo du club"
+    allow="autoplay; encrypted-media"
+    allowFullScreen
+    className="w-full h-full"
+    style={{ border: 'none' }}
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+</div>
+</div>
+</section>
 
       {/* SECTION COURS */}
       <section className="py-32 bg-white text-black">

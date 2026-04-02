@@ -11,7 +11,6 @@ const Home = () => {
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const navigate = useNavigate();
 
-  // --- CONFIGURATION DE TA GALERIE (5 PHOTOS) ---
   const galleryImages = [
     { id: 1, src: '/img1.jpg', size: 'md:col-span-2 md:row-span-2 col-span-2 h-64 md:h-full' }, 
     { id: 2, src: '/img2.jpg', size: 'col-span-1 h-40 md:h-full' },
@@ -37,9 +36,9 @@ const Home = () => {
             </h1>
           </motion.div>
           <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center items-center">
-             <div className="h-[1px] w-12 bg-white hidden md:block" />
-             <p className="uppercase tracking-[0.3em] text-xs font-bold">Provins • Boxe & Lutte • 1994</p>
-             <div className="h-[1px] w-12 bg-white hidden md:block" />
+            <div className="h-[1px] w-12 bg-white hidden md:block" />
+            <p className="uppercase tracking-[0.3em] text-xs font-bold">Provins • Boxe & Lutte • 1994</p>
+            <div className="h-[1px] w-12 bg-white hidden md:block" />
           </div>
         </div>
         
@@ -48,7 +47,7 @@ const Home = () => {
         </div>
       </header>
 
-      {/* SECTION VALEURS AVEC VIDÉO LOCALE */}
+      {/* SECTION VALEURS AVEC VIDÉO */}
       <section className="py-32 px-6 bg-[#0a0a0a] text-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
@@ -58,50 +57,51 @@ const Home = () => {
               Une institution à Provins dédiée à la performance et au respect.
             </p>
             <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
-               <div>
-                 <div className="text-4xl font-black text-red-600 mb-1">98%</div>
-                 <div className="text-xs uppercase tracking-widest opacity-50">Satisfaction</div>
-               </div>
-               <div>
-                 <div className="text-4xl font-black text-red-600 mb-1">12</div>
-                 <div className="text-xs uppercase tracking-widest opacity-50">Coachs Pro</div>
-               </div>
+              <div>
+                <div className="text-4xl font-black text-red-600 mb-1">98%</div>
+                <div className="text-xs uppercase tracking-widest opacity-50">Satisfaction</div>
+              </div>
+              <div>
+                <div className="text-4xl font-black text-red-600 mb-1">12</div>
+                <div className="text-xs uppercase tracking-widest opacity-50">Coachs Pro</div>
+              </div>
             </div>
           </div>
-          
+
           {/* LECTEUR VIDÉO YouTube */}
-<div className="relative aspect-video overflow-hidden rounded-sm bg-zinc-900 border border-white/10 shadow-2xl">
-  <iframe
-    src="https://www.youtube.com/embed/wGbV1slRWAQ?autoplay=1&mute=1&loop=1&playlist=wGbV1slRWAQ&controls=0&showinfo=0&rel=0"
-    title="Vidéo du club"
-    allow="autoplay; encrypted-media"
-    allowFullScreen
-    className="w-full h-full"
-    style={{ border: 'none' }}
-  />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-</div>
-</div>
-</section>
+          <div className="relative aspect-video overflow-hidden rounded-sm bg-zinc-900 border border-white/10 shadow-2xl">
+            <iframe
+              src="https://www.youtube.com/embed/wGbV1slRWAQ?autoplay=1&mute=1&loop=1&playlist=wGbV1slRWAQ&controls=0&rel=0&modestbranding=1"
+              title="Vidéo du club"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              className="w-full h-full scale-110"
+              style={{ border: 'none' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+          </div>
+
+        </div>
+      </section>
 
       {/* SECTION COURS */}
       <section className="py-32 bg-white text-black">
         <div className="px-6 mb-12">
-           <SectionHeader title="Dominez le Ring" subtitle="Nos Disciplines" />
+          <SectionHeader title="Dominez le Ring" subtitle="Nos Disciplines" />
         </div>
         <div className="flex flex-col md:flex-row h-[70vh] w-full border-y border-black">
           {CLASSES_DATA.map((item) => (
             <div key={item.id} className="relative group flex-1 border-r border-black overflow-hidden transition-all duration-500 hover:flex-[2] cursor-pointer grayscale hover:grayscale-0">
-               <img src={item.img} className="absolute inset-0 w-full h-full object-cover" alt={item.title} />
-               <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition" />
-               <div className="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/90 to-transparent text-white">
-                 <h3 className="text-4xl font-black uppercase italic leading-none mb-2 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:mb-12 md:group-hover:rotate-0 md:group-hover:translate-x-0 md:group-hover:mb-2 transition-all duration-500">
-                   {item.title}
-                 </h3>
-                 <p className="opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 text-sm font-mono mt-2 border-t border-white/50 pt-2">
-                   {item.details}
-                 </p>
-               </div>
+              <img src={item.img} className="absolute inset-0 w-full h-full object-cover" alt={item.title} />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition" />
+              <div className="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/90 to-transparent text-white">
+                <h3 className="text-4xl font-black uppercase italic leading-none mb-2 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:mb-12 md:group-hover:rotate-0 md:group-hover:translate-x-0 md:group-hover:mb-2 transition-all duration-500">
+                  {item.title}
+                </h3>
+                <p className="opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 text-sm font-mono mt-2 border-t border-white/50 pt-2">
+                  {item.details}
+                </p>
+              </div>
             </div>
           ))}
         </div>
@@ -112,7 +112,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- SECTION GALERIE PHOTO --- */}
+      {/* SECTION GALERIE PHOTO */}
       <section className="py-32 bg-black text-white px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-12">
